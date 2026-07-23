@@ -6,19 +6,40 @@ import { ClientSelect } from "./ClientSelect";
 import { ProductPicker } from "./ProductPicker";
 import { ItemsList } from "./ItemsList";
 import { ConfirmModal } from "./ConfirmModal";
+import { ClientFormModal } from "./ClientFormModal";
+import { ProductFormModal } from "./ProductFormModal";
 
 interface Props {
   products: Product[];
   clients: Client[];
 }
 
-export function DeliveryNoteForm({ products, clients }: Props) {
+export function DeliveryNoteForm({
+  products: baseProducts,
+  clients: baseClients,
+}: Props) {
   const [clientId, setClientId] = useState<string | null>(null);
   const [items, setItems] = useState<DeliveryItem[]>([]);
   const [observaciones, setObservaciones] = useState("");
   const [fecha, setFecha] = useState<string>(todayISO());
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [showConfirm, setShowConfirm] = useState(false);
+
+  // Clientes/productos cargados manualmente en esta sesion. No se persisten al
+  // JSON original: solo existen mientras dura el remito actual.
+  const [extraClients, setExtraClients] = useState<Client[]>([]);
+  const [extraProducts, setExtraProducts] = useState<Product[]>([]);
+  const [showClientForm, setShowClientForm] = useState(false);
+  const [showProductForm, setShowProductForm] = useState(false);
+
+  const clients = useMemo(
+    () => [...baseClients, ...extraClients],
+    [baseClients, extraClients],
+  );
+  const products = useMemo(
+    () => [...baseProducts, ...extraProducts],
+    [baseProducts, extraProducts],
+  );
 
   const productsById = useMemo(
     () => new Map(products.map((p) => [p.id, p])),
@@ -49,6 +70,24 @@ export function DeliveryNoteForm({ products, clients }: Props) {
         },
       ];
     });
+  }
+
+  // Alta manual de un cliente: lo agrega a la lista de la sesion y lo deja
+  // seleccionado en el remito.
+  function handleCreateClient(data: Omit<Client, "id">) {
+    const client: Client = { id: crypto.randomUUID(), ...data };
+    setExtraClients((prev) => [...prev, client]);
+    setClientId(client.id);
+    setShowClientForm(false);
+  }
+
+  // Alta manual de un producto: lo agrega a la lista de la sesion y lo carga
+  // directamente como item del remito.
+  function handleCreateProduct(data: Omit<Product, "id">) {
+    const product: Product = { id: crypto.randomUUID(), ...data };
+    setExtraProducts((prev) => [...prev, product]);
+    handleAddProduct(product);
+    setShowProductForm(false);
   }
 
   function handleChangeCantidad(productId: string, cantidad: number) {
@@ -129,6 +168,7 @@ export function DeliveryNoteForm({ products, clients }: Props) {
           clients={clients}
           selectedId={clientId}
           onChange={setClientId}
+          onRequestNew={() => setShowClientForm(true)}
         />
         <div className="field field-fecha">
           <label htmlFor="fecha">Fecha</label>
@@ -145,6 +185,7 @@ export function DeliveryNoteForm({ products, clients }: Props) {
         products={products}
         quantities={quantities}
         onAdd={handleAddProduct}
+        onRequestNew={() => setShowProductForm(true)}
       />
 
       <div className="field">
@@ -189,6 +230,20 @@ export function DeliveryNoteForm({ products, clients }: Props) {
           observaciones={observaciones}
           onConfirm={handleConfirm}
           onCancel={() => setShowConfirm(false)}
+        />
+      )}
+
+      {showClientForm && (
+        <ClientFormModal
+          onSubmit={handleCreateClient}
+          onCancel={() => setShowClientForm(false)}
+        />
+      )}
+
+      {showProductForm && (
+        <ProductFormModal
+          onSubmit={handleCreateProduct}
+          onCancel={() => setShowProductForm(false)}
         />
       )}
     </div>

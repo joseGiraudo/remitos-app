@@ -139,6 +139,25 @@ textarea:focus {
   box-shadow: 0 0 0 1px var(--primary) inset;
 }
 
+/* Tarjeta para dar de alta un producto que no esta en la lista. */
+.product-card-add {
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.product-card-add:hover {
+  color: var(--primary);
+}
+
+.product-card-add-icon {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .product-card-name {
   font-weight: 600;
   font-size: 0.95rem;
@@ -335,6 +354,47 @@ button:disabled {
   background: #fff;
   border-color: var(--border);
   color: var(--text);
+}
+
+/* Select + boton "Nuevo" alineados en una fila. */
+.input-with-action {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.input-with-action select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.btn-add {
+  flex: 0 0 auto;
+  border: 1px solid var(--primary);
+  background: #fff;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.btn-add:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Formularios de alta manual dentro del modal. */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modal-form .form-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.modal-form .form-row .field {
+  flex: 1 1 140px;
 }
 
 .error-msg {

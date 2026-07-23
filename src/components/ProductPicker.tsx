@@ -7,13 +7,19 @@ interface Props {
   // productId -> cantidad ya cargada, para mostrar el badge en cada tarjeta.
   quantities: Map<string, number>;
   onAdd: (product: Product) => void;
+  onRequestNew: () => void;
 }
 
 // Umbral a partir del cual mostramos el buscador. Con pocos productos
 // (ej: las pizzas) la grilla sola alcanza y queda mas limpio.
 const SEARCH_THRESHOLD = 8;
 
-export function ProductPicker({ products, quantities, onAdd }: Props) {
+export function ProductPicker({
+  products,
+  quantities,
+  onAdd,
+  onRequestNew,
+}: Props) {
   const [query, setQuery] = useState("");
   const showSearch = products.length > SEARCH_THRESHOLD;
 
@@ -60,6 +66,16 @@ export function ProductPicker({ products, quantities, onAdd }: Props) {
             </button>
           );
         })}
+
+        <button
+          type="button"
+          className="product-card product-card-add"
+          onClick={onRequestNew}
+          title="Cargar un producto que no esta en la lista"
+        >
+          <span className="product-card-add-icon">+</span>
+          <span className="product-card-name">Nuevo producto</span>
+        </button>
       </div>
     </div>
   );

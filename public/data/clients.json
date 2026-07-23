@@ -1,0 +1,34 @@
+[
+  {
+    "id": "c-001",
+    "nombre": "Consumidor final",
+    "domicilio": "-",
+    "telefono": "-",
+    "email": "-"
+  },
+  {
+    "id": "c-002",
+    "nombre": "Juan Perez",
+    "domicilio": "Belgrano 456, Villa Maria",
+    "telefono": "353-1122334"
+  },
+  {
+    "id": "c-003",
+    "nombre": "Corralon del Centro",
+    "domicilio": "Ruta 9 Km 45, Rio Segundo",
+    "telefono": "3572-445566",
+    "email": "ventas@corralondelcentro.com"
+  },
+  {
+    "id": "c-004",
+    "nombre": "Maria Gomez",
+    "domicilio": "Sarmiento 789, Cordoba"
+  },
+  {
+    "id": "c-005",
+    "nombre": "Obras y Servicios del Sur SRL",
+    "domicilio": "Parque Industrial, Lote 12, Almafuerte",
+    "telefono": "3571-987654",
+    "email": "info@obrasdelsur.com.ar"
+  }
+]

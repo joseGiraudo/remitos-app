@@ -1,0 +1,30 @@
+[
+  {
+    "id": "p-001",
+    "nombre": "Pizza muzzarella",
+    "descripcion": "Muzzarella y salsa de tomate",
+    "precioUnitario": 9500,
+    "unidad": "unidad"
+  },
+  {
+    "id": "p-002",
+    "nombre": "Pizza con jamon",
+    "descripcion": "Muzzarella y jamon",
+    "precioUnitario": 11000,
+    "unidad": "unidad"
+  },
+  {
+    "id": "p-003",
+    "nombre": "Pizza con morron",
+    "descripcion": "Muzzarella y morron",
+    "precioUnitario": 11500,
+    "unidad": "unidad"
+  },
+  {
+    "id": "p-004",
+    "nombre": "Pizza calabresa",
+    "descripcion": "Muzzarella y longaniza calabresa",
+    "precioUnitario": 13000,
+    "unidad": "unidad"
+  }
+]

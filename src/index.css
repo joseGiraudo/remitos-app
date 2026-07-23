@@ -1,0 +1,460 @@
+:root {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --border: #d8dbe0;
+  --text: #1f2430;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger: #dc2626;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+.app-header h1 {
+  font-size: 1.6rem;
+  margin: 0 0 1.25rem;
+}
+
+.app-main {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.status {
+  text-align: center;
+  color: var(--muted);
+}
+
+/* --- Formulario --- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row .field {
+  flex: 1 1 240px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-fecha {
+  flex: 0 0 180px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: -1px;
+}
+
+.client-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* --- Grilla de productos (mostrador) --- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.product-grid-empty {
+  color: var(--muted);
+  margin: 0.25rem 0;
+}
+
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-height: 72px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  text-align: left;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.product-card:hover {
+  border-color: var(--primary);
+}
+
+.product-card.is-selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary) inset;
+}
+
+.product-card-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.product-card-price {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.product-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Lista de items (detalle) --- */
+.items-empty {
+  color: var(--muted);
+  margin: 0.25rem 0;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.item-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  background: #fff;
+}
+
+.item-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.item-name {
+  font-weight: 600;
+}
+
+.item-unidad {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.item-card-body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stepper button {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 8px;
+}
+
+.stepper input {
+  width: 60px;
+  text-align: center;
+  padding: 0.45rem 0.3rem;
+}
+
+.item-precio {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.item-precio input {
+  width: 110px;
+  text-align: right;
+  padding: 0.4rem 0.5rem;
+}
+
+.item-subtotal {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.items-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  margin-top: 0.2rem;
+  border-top: 2px solid var(--text);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.col-num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.total-label {
+  font-weight: 700;
+}
+
+.total-value {
+  font-weight: 700;
+}
+
+.btn-remove {
+  background: transparent;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.1rem 0.35rem;
+  line-height: 1;
+}
+
+/* --- Acciones --- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  padding: 0.55rem 1.1rem;
+  font: inherit;
+  font-weight: 500;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.product-list-item button {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--primary);
+  background: #fff;
+  color: var(--primary);
+}
+
+.product-list-item button:disabled {
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: #fff;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.error-msg {
+  color: var(--danger);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* --- Modal de confirmacion --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 20, 30, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-head h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.modal-fecha {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.modal-body {
+  padding: 1rem 1.25rem;
+  overflow-y: auto;
+}
+
+.modal-section {
+  margin-bottom: 1.1rem;
+}
+
+.modal-section:last-child {
+  margin-bottom: 0;
+}
+
+.modal-section h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.modal-client-name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.modal-muted {
+  margin: 0.15rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.modal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.modal-table th,
+.modal-table td {
+  padding: 0.35rem 0.4rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.modal-table thead th {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.modal-table tfoot td {
+  border-bottom: none;
+  border-top: 2px solid var(--text);
+  font-size: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 520px) {
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+  .modal-actions button {
+    width: 100%;
+  }
+}
